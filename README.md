@@ -1,5 +1,11 @@
-# projet-specialise-2022-MathéoGaluba
-projet-specialise-2022-Paracetamol56 created by GitHub Classroom
+# Projet specialisé (2022) - MathéoGaluba
+
+## Informations
+
+- **Nom du projet :** Darwin’s battle royale arena
+- **Repo github :** [lien](https://github.com/cegepmatane/projet-specialise-2022-Matheo-Galuba)
+- **Aspect pricipal :** Intelligence Artificielle
+## Documentation du projet
 
 [Lien vers la fiche de lancement "kickoff"](https://docs.google.com/document/d/1qF1iZAdF3IDPa3s8YlFjtiXWpijnrOiP3hhAlVRNXjY/edit?usp=sharing)
 
