@@ -16,6 +16,8 @@ public class MoveToGoalAgent : Agent
 
     public override void OnEpisodeBegin()
     {
+        // Reset the agent position
+        transform.position = new Vector3(0f, 1f, 0f);
         // Reset the target position
         target.position = new Vector3(Random.Range(-4f, 4f), 1f, Random.Range(-4f, 4f));
     }
@@ -48,7 +50,7 @@ public class MoveToGoalAgent : Agent
     }
 
     // Method called when the agent reach the goal
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         // === Uncomment to debug the agent === //
         // Debug.Log("OnTriggerEnter");
@@ -61,6 +63,18 @@ public class MoveToGoalAgent : Agent
 
             // Reward the agent
             AddReward(1f);
+            // End the episode
+            EndEpisode();
+        }
+
+        // If the agent touch the wall
+        if (other.CompareTag("wall"))
+        {
+            // === Uncomment to debug the agent === //
+            // Debug.Log("Wall touched");
+
+            // Punish the agent
+            AddReward(-1f);
             // End the episode
             EndEpisode();
         }
