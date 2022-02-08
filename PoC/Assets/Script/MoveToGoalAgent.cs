@@ -13,7 +13,12 @@ public class MoveToGoalAgent : Agent
     // Move speed
     [SerializeField]
     private float moveSpeed = 5f;
-    // Vision parameter
+    // Vision parameters
+    [SerializeField]
+    private float viewField = 90f;
+    [SerializeField]
+    [Range(3, 30)]
+    private uint viewRayNumber = 9;
 
     public override void OnEpisodeBegin()
     {
@@ -25,7 +30,6 @@ public class MoveToGoalAgent : Agent
 
     public void Update()
     {
-        // Lunch 3 raycast in fornt of the agent with an angle of 30°
         // Make a layer mask to ignore the "Environment" layer
         int layerMask = 1 << LayerMask.NameToLayer("Environment");
         layerMask = ~layerMask;
@@ -33,32 +37,19 @@ public class MoveToGoalAgent : Agent
         Vector3 raycastOrigin = transform.localPosition + transform.forward * 0.51f;
         // Raycast output
         RaycastHit hit;
-        // Central raycast
-        Vector3 raycastDirection = Quaternion.AngleAxis(0f, transform.up) * transform.forward;
-        Physics.Raycast(raycastOrigin, raycastDirection, out hit, 10.0f, layerMask);
-        if (hit.collider)
-            Debug.DrawRay(raycastOrigin, raycastDirection * hit.distance, Color.red, 0.1f);
-        else
-            Debug.DrawRay(raycastOrigin, raycastDirection * 10.0f, Color.green, 0.1f);
 
-        // Left raycast
-        raycastDirection = Quaternion.AngleAxis(30f, transform.up) * transform.forward;
-        Physics.Raycast(raycastOrigin, raycastDirection, out hit, 10.0f, layerMask);
-        if (hit.collider)
-            Debug.DrawRay(raycastOrigin, raycastDirection * hit.distance, Color.red, 0.1f);
-        else
-            Debug.DrawRay(raycastOrigin, raycastDirection * 10.0f, Color.green, 0.1f);
-
-        // Right raycast
-        raycastDirection = Quaternion.AngleAxis(-30f, transform.up) * transform.forward;
-        Physics.Raycast(raycastOrigin, raycastDirection, out hit, 10.0f, layerMask);
-        if (hit.collider)
-            Debug.DrawRay(raycastOrigin, raycastDirection * hit.distance, Color.red, 0.1f);
-        else
-            Debug.DrawRay(raycastOrigin, raycastDirection * 10.0f, Color.green, 0.1f);
-
-        for ()
+        for (int i = 0; i < viewRayNumber; i++)
+        {
+            // Compute the raycast direction
+            Vector3 raycastDirection = Quaternion.AngleAxis(-viewField / 2f + (viewField / (viewRayNumber - 1)) * i, transform.up) * transform.forward;
+            Physics.Raycast(raycastOrigin, raycastDirection, out hit, 10.0f, layerMask);
+            if (hit.collider)
+                Debug.DrawRay(raycastOrigin, raycastDirection * hit.distance, Color.red, 0.01f);
+            else
+                Debug.DrawRay(raycastOrigin, raycastDirection * 10.0f, Color.green, 0.01f);
+        }
     }
+
 
     // Method called when the neural network request observation data
     public override void CollectObservations(VectorSensor sensor)
