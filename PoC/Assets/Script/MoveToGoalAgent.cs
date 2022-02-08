@@ -17,18 +17,32 @@ public class MoveToGoalAgent : Agent
     public override void OnEpisodeBegin()
     {
         // Reset the agent position
-        transform.position = new Vector3(0f, 1f, 0f);
+        transform.localPosition = new Vector3(0f, 1f, 0f);
         // Reset the target position
-        target.position = new Vector3(Random.Range(-4f, 4f), 1f, Random.Range(-4f, 4f));
+        target.localPosition = new Vector3(Random.Range(-4f, 4f), 1f, Random.Range(-4f, 4f));
     }
 
     // Method called when the neural network request observation data
     public override void CollectObservations(VectorSensor sensor)
     {
-        // Agent position
-        sensor.AddObservation(transform.position);
-        // Target position
-        sensor.AddObservation(target.position);
+        // Lunch 3 raycast in fornt of the agent with an angle of 30°
+        // Central raycast
+        Vector3 raycastDirection = new Vector3(0f, 0f, 0f);
+        Physics.Raycast(transform.localPosition, raycastDirection, out RaycastHit hit, 10.0f);
+        Debug.DrawRay(transform.localPosition, raycastDirection, hit.collider ? Color.green : Color.red);
+        sensor.AddObservation(hit.distance);
+
+        // Left raycast
+        raycastDirection = Quaternion.Euler(0f, 30f, 0f) * new Vector3(0f, 0f, 0f);
+        Physics.Raycast(transform.localPosition, raycastDirection, out hit, 10.0f);
+        Debug.DrawRay(transform.localPosition, raycastDirection, hit.collider ? Color.green : Color.red);
+        sensor.AddObservation(hit.distance);
+
+        // Right raycast
+        raycastDirection = Quaternion.Euler(0f, -30f, 0f) * new Vector3(0f, 0f, 0f);
+        Physics.Raycast(transform.localPosition, raycastDirection, out hit, 10.0f);
+        Debug.DrawRay(transform.localPosition, raycastDirection, hit.collider ? Color.green : Color.red);
+        sensor.AddObservation(hit.distance);
     }
 
     // Method called when the agent receive data from the neural network
@@ -43,10 +57,19 @@ public class MoveToGoalAgent : Agent
 
         // Recieve the action from the neural network
         float moveX = actions.ContinuousActions[0];
-        float moveZ = actions.ContinuousActions[1];
+        float moveY = actions.ContinuousActions[1];
 
         // Move the agent
-        transform.Translate(moveX * moveSpeed * Time.deltaTime, 0f, moveZ * moveSpeed * Time.deltaTime);
+        transform.Translate(0f, 0f, moveY * moveSpeed * Time.deltaTime);
+        transform.Rotate(0f, moveX * 180f * Time.deltaTime, 0f);
+    }
+
+    // Methode called when the user override the agent actions with heuristic mode
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
+        continuousActions[0] = Input.GetAxis("Horizontal");
+        continuousActions[1] = Input.GetAxis("Vertical");
     }
 
     // Method called when the agent reach the goal
