@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 21151963}
   - component: {fileID: 21151962}
   - component: {fileID: 21151961}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Border
   m_TagString: wall
   m_Icon: {fileID: 0}
@@ -417,7 +417,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   target: {fileID: 1594747582}
-  moveSpeed: 1
+  moveSpeed: 5
 --- !u!114 &757565372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,7 +438,7 @@ MonoBehaviour:
     VectorActionSpaceType: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 1
   m_BehaviorName: MoveToGoal
   TeamId: 0
   m_UseChildSensors: 1
@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 976440884}
   - component: {fileID: 976440883}
   - component: {fileID: 976440882}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Border
   m_TagString: wall
   m_Icon: {fileID: 0}
@@ -581,7 +581,7 @@ GameObject:
   - component: {fileID: 1195670128}
   - component: {fileID: 1195670127}
   - component: {fileID: 1195670126}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Border
   m_TagString: wall
   m_Icon: {fileID: 0}
@@ -864,7 +864,7 @@ GameObject:
   - component: {fileID: 1925677640}
   - component: {fileID: 1925677639}
   - component: {fileID: 1925677638}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Border
   m_TagString: wall
   m_Icon: {fileID: 0}
@@ -959,7 +959,7 @@ GameObject:
   - component: {fileID: 1990931513}
   - component: {fileID: 1990931512}
   - component: {fileID: 1990931511}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ground
   m_TagString: ground
   m_Icon: {fileID: 0}

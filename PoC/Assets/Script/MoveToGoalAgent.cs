@@ -26,23 +26,31 @@ public class MoveToGoalAgent : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         // Lunch 3 raycast in fornt of the agent with an angle of 30°
+        // Make a layer mask to ignore the "Environment" layer
+        int environmentLayer = LayerMask.NameToLayer("Environment");
+        int layerMask = 1 << environmentLayer;
+        // Eyes position
+        Vector3 raycastOrigin = transform.localPosition + Vector3.forward * 0.6f;
         // Central raycast
         Vector3 raycastDirection = new Vector3(0f, 0f, 0f);
-        Physics.Raycast(transform.localPosition, raycastDirection, out RaycastHit hit, 10.0f);
-        Debug.DrawRay(transform.localPosition, raycastDirection, hit.collider ? Color.green : Color.red);
+        Physics.Raycast(raycastOrigin, raycastDirection, out RaycastHit hit, 10.0f);
+        Debug.DrawRay(raycastOrigin, raycastDirection, hit.collider ? Color.green : Color.red);
         sensor.AddObservation(hit.distance);
+        Debug.Log(hit.distance);
 
         // Left raycast
         raycastDirection = Quaternion.Euler(0f, 30f, 0f) * new Vector3(0f, 0f, 0f);
-        Physics.Raycast(transform.localPosition, raycastDirection, out hit, 10.0f);
-        Debug.DrawRay(transform.localPosition, raycastDirection, hit.collider ? Color.green : Color.red);
+        Physics.Raycast(raycastOrigin, raycastDirection, out hit, 10.0f);
+        Debug.DrawRay(raycastOrigin, raycastDirection, hit.collider ? Color.green : Color.red);
         sensor.AddObservation(hit.distance);
+        Debug.Log(hit.distance);
 
         // Right raycast
         raycastDirection = Quaternion.Euler(0f, -30f, 0f) * new Vector3(0f, 0f, 0f);
-        Physics.Raycast(transform.localPosition, raycastDirection, out hit, 10.0f);
-        Debug.DrawRay(transform.localPosition, raycastDirection, hit.collider ? Color.green : Color.red);
+        Physics.Raycast(raycastOrigin, raycastDirection, out hit, 10.0f);
+        Debug.DrawRay(raycastOrigin, raycastDirection, hit.collider ? Color.green : Color.red);
         sensor.AddObservation(hit.distance);
+        Debug.Log(hit.distance);
     }
 
     // Method called when the agent receive data from the neural network
