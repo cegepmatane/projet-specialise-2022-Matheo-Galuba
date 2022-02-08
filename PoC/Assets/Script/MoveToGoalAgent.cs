@@ -13,6 +13,13 @@ public class MoveToGoalAgent : Agent
     // Move speed
     [SerializeField]
     private float moveSpeed = 5f;
+    // Ground Mesh Renderer
+    [SerializeField]
+    private MeshRenderer groundMeshRenderer;
+    [SerializeField]
+    private Material redMaterial;
+    [SerializeField]
+    private Material greenMaterial;
     // Vision parameters
     [SerializeField]
     private float viewField = 90f;
@@ -28,8 +35,10 @@ public class MoveToGoalAgent : Agent
         target.localPosition = new Vector3(Random.Range(-4f, 4f), 1f, Random.Range(-4f, 4f));
     }
 
-    public void Update()
+    // Method called when the neural network request observation data
+    public override void CollectObservations(VectorSensor sensor)
     {
+        // Lunch 3 raycast in fornt of the agent with an angle of 30°
         // Make a layer mask to ignore the "Environment" layer
         int layerMask = 1 << LayerMask.NameToLayer("Environment");
         layerMask = ~layerMask;
@@ -43,43 +52,12 @@ public class MoveToGoalAgent : Agent
             // Compute the raycast direction
             Vector3 raycastDirection = Quaternion.AngleAxis(-viewField / 2f + (viewField / (viewRayNumber - 1)) * i, transform.up) * transform.forward;
             Physics.Raycast(raycastOrigin, raycastDirection, out hit, 10.0f, layerMask);
-            if (hit.collider)
-                Debug.DrawRay(raycastOrigin, raycastDirection * hit.distance, Color.red, 0.01f);
-            else
-                Debug.DrawRay(raycastOrigin, raycastDirection * 10.0f, Color.green, 0.01f);
+            // if (hit.collider)
+            //     Debug.DrawRay(raycastOrigin, raycastDirection * hit.distance, Color.red);
+            // else
+            //     Debug.DrawRay(raycastOrigin, raycastDirection * 10.0f, Color.green, 0.01f);
+            sensor.AddObservation(hit.distance);
         }
-    }
-
-
-    // Method called when the neural network request observation data
-    public override void CollectObservations(VectorSensor sensor)
-    {
-        // Lunch 3 raycast in fornt of the agent with an angle of 30°
-        // Make a layer mask to ignore the "Environment" layer
-        int environmentLayer = LayerMask.NameToLayer("Environment");
-        int layerMask = 1 << environmentLayer;
-        // Eyes position
-        Vector3 raycastOrigin = transform.localPosition + Vector3.forward * 0.6f;
-        // Central raycast
-        Vector3 raycastDirection = new Vector3(0f, 0f, 0f);
-        Physics.Raycast(raycastOrigin, raycastDirection, out RaycastHit hit, 10.0f);
-        Debug.DrawRay(raycastOrigin, raycastDirection, hit.collider ? Color.green : Color.red);
-        sensor.AddObservation(hit.distance);
-        //Debug.Log(hit.distance);
-
-        // Left raycast
-        raycastDirection = Quaternion.Euler(0f, 30f, 0f) * new Vector3(0f, 0f, 0f);
-        Physics.Raycast(raycastOrigin, raycastDirection, out hit, 10.0f);
-        Debug.DrawRay(raycastOrigin, raycastDirection, hit.collider ? Color.green : Color.red);
-        sensor.AddObservation(hit.distance);
-        //Debug.Log(hit.distance);
-
-        // Right raycast
-        raycastDirection = Quaternion.Euler(0f, -30f, 0f) * new Vector3(0f, 0f, 0f);
-        Physics.Raycast(raycastOrigin, raycastDirection, out hit, 10.0f);
-        Debug.DrawRay(raycastOrigin, raycastDirection, hit.collider ? Color.green : Color.red);
-        sensor.AddObservation(hit.distance);
-        //Debug.Log(hit.distance);
     }
 
     // Method called when the agent receive data from the neural network
@@ -123,6 +101,8 @@ public class MoveToGoalAgent : Agent
 
             // Reward the agent
             AddReward(1f);
+            // Color the ground green
+            groundMeshRenderer.material = greenMaterial;
             // End the episode
             EndEpisode();
         }
@@ -135,6 +115,8 @@ public class MoveToGoalAgent : Agent
 
             // Punish the agent
             AddReward(-1f);
+            // Color the ground red
+            groundMeshRenderer.material = redMaterial;
             // End the episode
             EndEpisode();
         }
