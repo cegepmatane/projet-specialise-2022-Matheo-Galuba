@@ -26,6 +26,8 @@ public class MoveToGoalAgent : Agent
     [SerializeField]
     [Range(3, 30)]
     private uint viewRayNumber = 9;
+    [SerializeField]
+    private bool showRays = false;
 
     public override void OnEpisodeBegin()
     {
@@ -52,10 +54,13 @@ public class MoveToGoalAgent : Agent
             // Compute the raycast direction
             Vector3 raycastDirection = Quaternion.AngleAxis(-viewField / 2f + (viewField / (viewRayNumber - 1)) * i, transform.up) * transform.forward;
             Physics.Raycast(raycastOrigin, raycastDirection, out hit, 10.0f, layerMask);
-            // if (hit.collider)
-            //     Debug.DrawRay(raycastOrigin, raycastDirection * hit.distance, Color.red);
-            // else
-            //     Debug.DrawRay(raycastOrigin, raycastDirection * 10.0f, Color.green, 0.01f);
+            if (showRays)
+            {
+                if (hit.collider)
+                    Debug.DrawRay(raycastOrigin, raycastDirection * hit.distance, Color.red);
+                else
+                    Debug.DrawRay(raycastOrigin, raycastDirection * 10.0f, Color.green, 0.01f);
+            }
             sensor.AddObservation(hit.distance);
         }
     }
