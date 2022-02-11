@@ -17,18 +17,18 @@ public class MoveToGoalAgent : Agent
     public override void OnEpisodeBegin()
     {
         // Reset the agent position
-        transform.position = new Vector3(0f, 1f, 0f);
+        transform.localPosition = new Vector3(0f, 1f, 0f);
         // Reset the target position
-        target.position = new Vector3(Random.Range(-4f, 4f), 1f, Random.Range(-4f, 4f));
+        target.localPosition = new Vector3(Random.Range(-4f, 4f), 1f, Random.Range(-4f, 4f));
     }
 
     // Method called when the neural network request observation data
     public override void CollectObservations(VectorSensor sensor)
     {
         // Agent position
-        sensor.AddObservation(transform.position);
+        sensor.AddObservation(transform.localPosition);
         // Target position
-        sensor.AddObservation(target.position);
+        sensor.AddObservation(target.localPosition);
     }
 
     // Method called when the agent receive data from the neural network
