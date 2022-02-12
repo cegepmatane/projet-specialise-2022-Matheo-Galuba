@@ -45,7 +45,7 @@ public class MoveToGoalAgent : Agent
         int layerMask = 1 << LayerMask.NameToLayer("Environment");
         layerMask = ~layerMask;
         // Eyes position
-        Vector3 raycastOrigin = transform.localPosition + transform.forward * 0.51f;
+        Vector3 raycastOrigin = transform.position + transform.forward * 0.51f;
         // Raycast output
         RaycastHit hit;
 
@@ -59,7 +59,7 @@ public class MoveToGoalAgent : Agent
                 if (hit.collider)
                     Debug.DrawRay(raycastOrigin, raycastDirection * hit.distance, Color.red);
                 else
-                    Debug.DrawRay(raycastOrigin, raycastDirection * 10.0f, Color.green, 0.01f);
+                    Debug.DrawRay(raycastOrigin, raycastDirection * 10.0f, Color.green);
             }
             sensor.AddObservation(hit.distance);
         }

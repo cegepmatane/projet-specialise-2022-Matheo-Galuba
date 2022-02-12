@@ -514,17 +514,21 @@ MonoBehaviour:
   m_BrainParameters:
     VectorObservationSize: 10
     NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 2
+      BranchSizes: 
     VectorActionSize: 02000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
-  m_Model: {fileID: 0}
-  m_InferenceDevice: 0
-  m_BehaviorType: 1
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 5022602860645237092, guid: c0460d5f4f6c168429d06b9515f11dda, type: 3}
+  m_InferenceDevice: 1
+  m_BehaviorType: 2
   m_BehaviorName: MoveToGoal
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
-  m_ObservableAttributeHandling: 0
+  m_ObservableAttributeHandling: 2
 --- !u!114 &5560739494974953718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,7 +558,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
+  MaxStep: 7500
   target: {fileID: 5560739494671283701}
   moveSpeed: 5
   groundMeshRenderer: {fileID: 5560739494027275123}
