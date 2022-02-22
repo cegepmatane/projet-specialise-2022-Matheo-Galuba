@@ -19,6 +19,8 @@
 
 [Lien vers la fiche PoC et choix technologique](https://docs.google.com/document/d/1ZCOmIQDouk4uAv60toCLpWuOyfnVU_dnbTMCDXv3HIQ/edit?usp=sharing)
 
+[Lien vers l'analyse fonctionnelle](https://docs.google.com/presentation/d/1bdEYoB69v9VMd3qPk5wFryMiO5MysNJJ0BKXZ6yxKao/edit?usp=sharing)
+
 ## Description du projet
 
 Mon projet est un un "zéro player game” ou “self played game” (comme le jeu de Conway), c'est-à-dire que le joueur sélectionne uniquement la situation initiale. C’est un projet d’intelligence artificielle évolutionniste : on réitère l'expérience sur plusieurs génération et chaque génération tire partie de la précédente avec certaines mutations possibles.
