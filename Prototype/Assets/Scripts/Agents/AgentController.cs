@@ -59,11 +59,11 @@ public class AgentController : Agent
     public override void OnActionReceived(ActionBuffers actions)
     {
         // === Uncomment to debug the agent === //
-        // Debug.Log("OnActionReceived");
+        Debug.Log("OnActionReceived");
         // This is to see the output of the neural network with continuous actions
-        // Debug.Log("Action: " + actions.ContinuousActions[0]);
+        Debug.Log("Action: " + actions.ContinuousActions[0]);
         // This is to see the output of the neural network with discrete actions
-        // Debug.Log("Action: " + actions.DiscreteActions[0]);
+        Debug.Log("Action: " + actions.DiscreteActions[0]);
 
         // Recieve the action from the neural network
         float moveX = actions.ContinuousActions[0];
@@ -80,5 +80,10 @@ public class AgentController : Agent
         ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
         continuousActions[0] = Input.GetAxis("Horizontal");
         continuousActions[1] = Input.GetAxis("Vertical");
+
+        // debug
+        Debug.Log("Heuristic");
+        Debug.Log("Action: " + continuousActions[0]);
+        Debug.Log("Action: " + continuousActions[1]);
     }
 }
