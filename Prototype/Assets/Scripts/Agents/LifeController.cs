@@ -71,6 +71,7 @@ public class LifeController : MonoBehaviour
         }
         else
         {
+            GetComponent<AgentController>().punish(damage);
             StartCoroutine(redFlash());
         }
     }

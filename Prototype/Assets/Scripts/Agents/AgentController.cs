@@ -87,10 +87,7 @@ public class AgentController : Agent
         // Attack
         if (attackAction == 1)
         {
-            if (reachableEnemies.Count > 0)
-            {
-                attack();
-            }
+            attack();
         }
     }
 
@@ -125,11 +122,20 @@ public class AgentController : Agent
     private void attack()
     {
         // === Uncomment to debug the agent === //
-        Debug.Log("Attack");
+        // Debug.Log("Attack");
 
-        foreach (Collider enemy in reachableEnemies)
+        if (reachableEnemies.Count > 0)
         {
-            enemy.gameObject.GetComponent<LifeController>().takeDamage(attackDamage);
+            foreach (Collider enemy in reachableEnemies)
+            {
+                AddReward(attackDamage);
+                enemy.gameObject.GetComponent<LifeController>().takeDamage(attackDamage);
+            }
         }
+    }
+
+    public void punish(float punishment)
+    {
+        AddReward(-punishment);
     }
 }

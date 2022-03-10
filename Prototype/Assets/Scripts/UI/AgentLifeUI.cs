@@ -17,10 +17,22 @@ public class AgentLifeUI : MonoBehaviour
 
     public void Update()
     {
-        float life = agent.GetComponent<LifeController>().getLife();
-        text.text = life.ToString("F0") + "%";
+        if (agent != null)
+        {
+            float life = agent.GetComponent<LifeController>().getLife();
+            text.text = life.ToString("F0") + "%";
 
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(agent.transform.position);
-        transform.position = screenPos + new Vector3(0.0f, textVerticalOffset, 0.0f);
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(agent.transform.position);
+            transform.position = screenPos + new Vector3(0.0f, textVerticalOffset, 0.0f);
+        }
+        else
+        {
+            text.text = "";
+        }
+    }
+
+    public void SetAgent(GameObject agent)
+    {
+        this.agent = agent;
     }
 }
