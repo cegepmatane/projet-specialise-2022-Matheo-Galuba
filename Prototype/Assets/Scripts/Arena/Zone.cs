@@ -11,6 +11,8 @@ public class Zone : MonoBehaviour
     [SerializeField]
     private float endSize = 10.0f;
 
+    private List<GameObject> agentsOutsideOfTheZone = new List<GameObject>();
+
     public void Start()
     {
         transform.localScale = new Vector3(startSize, startSize, startSize);
@@ -22,6 +24,37 @@ public class Zone : MonoBehaviour
         if (transform.localScale.x <= endSize)
         {
             Destroy(gameObject);
+        }
+
+        if (agentsOutsideOfTheZone.Count > 0)
+        {
+            foreach (GameObject agent in agentsOutsideOfTheZone)
+            {
+                if (agent == null)
+                {
+                    agentsOutsideOfTheZone.Remove(agent);
+                }
+                else
+                {
+                    agent.GetComponent<LifeController>().takeDamage(5.0f);
+                }
+            }
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Agent")
+        {
+            agentsOutsideOfTheZone.Remove(other.gameObject);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Agent")
+        {
+            agentsOutsideOfTheZone.Add(other.gameObject);
         }
     }
 }

@@ -13,6 +13,8 @@ public class AgentGenerator : MonoBehaviour
     private float radius = 20f;
     [SerializeField]
     private GameObject agentPrefab;
+    [SerializeField]
+    private Collider zoneCollider;
 
     // UI settings
     [Header("UI")]

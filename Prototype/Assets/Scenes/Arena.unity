@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 409126303}
   - component: {fileID: 409126304}
+  - component: {fileID: 409126305}
   m_Layer: 0
   m_Name: AgentGenerator
   m_TagString: Untagged
@@ -169,8 +170,21 @@ MonoBehaviour:
   populationSize: 20
   radius: 20
   agentPrefab: {fileID: 5114896165366492393, guid: 0be4d41793981c8499b1b78a854ca192, type: 3}
+  zoneCollider: {fileID: 1533861396}
   canvas: {fileID: 917103843}
   agentLifeUIPrefab: {fileID: 6607596634219118088, guid: 2e3c31bbbf097b74d803b5d033b1dfef, type: 3}
+--- !u!114 &409126305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409126302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2ce5809b9f8d684387404571353c2a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,7 +479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1533861395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,7 +492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9e226ed2441c9048b348c291117de45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  narrowingSpeed: 1
+  narrowingSpeed: 0.1
   startSize: 60
   endSize: 10
 --- !u!135 &1533861396

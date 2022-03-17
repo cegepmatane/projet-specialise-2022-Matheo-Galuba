@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5538708026177190555}
   - component: {fileID: 4007386045874407632}
+  - component: {fileID: 1801501973280282153}
   m_Layer: 2
   m_Name: ReachableEnemiesChecker
   m_TagString: Untagged
@@ -42,8 +43,21 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 1.9, z: 1}
+  m_Center: {x: 0, y: 0.00999999, z: -0.5}
+--- !u!114 &1801501973280282153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3102434651742348651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99fd89b2c9fd8db4db9e7732a5e28c76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reachableGameObjects: []
 --- !u!1 &5114896165366492393
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,14 +89,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5114896165366492393}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5538708026177190555}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8799974090939185654
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -185,7 +199,7 @@ MonoBehaviour:
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_BehaviorType: 1
   m_BehaviorName: Agent
   TeamId: 0
   m_UseChildSensors: 1
@@ -240,6 +254,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7cdbcd31bb20224892329ac9ebad472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoneCollider: {fileID: 0}
   life: 100
-  zoneDamage: 5

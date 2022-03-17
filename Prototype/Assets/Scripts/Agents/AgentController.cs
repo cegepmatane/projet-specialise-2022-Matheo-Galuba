@@ -30,7 +30,12 @@ public class AgentController : Agent
     private Collider reachableEnemiesChecker;
     [SerializeField]
     private float attackDamage = 1f;
-    private List<Collider> reachableEnemies = new List<Collider>();
+    private EnemyChecker enemyChecker;
+
+    public void Start()
+    {
+        enemyChecker = GetComponentsInChildren<EnemyChecker>()[0];
+    }
 
     public override void OnEpisodeBegin()
     {
@@ -102,34 +107,20 @@ public class AgentController : Agent
         descreteActions[0] = Input.GetKey(KeyCode.Space) ? 1 : 0;
     }
 
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Agent"))
-        {
-            reachableEnemies.Add(other);
-        }
-    }
-
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Agent"))
-        {
-            reachableEnemies.Remove(other);
-        }
-    }
-
     // Method called when the agent attack an enemy
     private void attack()
     {
         // === Uncomment to debug the agent === //
         // Debug.Log("Attack");
 
+        List<GameObject> reachableEnemies = enemyChecker.reachableGameObjects;
+
         if (reachableEnemies.Count > 0)
         {
-            foreach (Collider enemy in reachableEnemies)
+            foreach (GameObject enemy in reachableEnemies)
             {
                 AddReward(attackDamage);
-                enemy.gameObject.GetComponent<LifeController>().takeDamage(attackDamage);
+                enemy.GetComponent<LifeController>().takeDamage(attackDamage);
             }
         }
     }
