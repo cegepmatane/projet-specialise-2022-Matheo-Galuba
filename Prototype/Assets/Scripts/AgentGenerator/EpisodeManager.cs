@@ -12,27 +12,27 @@ public class EpisodeManager : MonoBehaviour
         {
             // if there is only one child, it means that the episode is over
             // so we can destroy the episode manager
-            resetScene();
-        }
-    }
 
-    private void resetScene()
-    {
-        // Destroy all children objects
-        foreach (Transform child in transform)
-        {
-            transform.gameObject.GetComponent<AgentController>().AddReward(20.0f);
-            Destroy(child.gameObject);
-        }
+            // Destroy all children objects
+            foreach (Transform child in transform)
+            {
+                child.gameObject.GetComponent<AgentController>().AddReward(20.0f);
+                Destroy(child.gameObject);
+            }
 
-        // Destroy all the ui objects
-        Canvas canvas = FindObjectsOfType<Canvas>()[0];
-        foreach (Transform child in canvas.transform)
-        {
-            Destroy(child.gameObject);
-        }
+            // Destroy all the ui objects
+            Canvas canvas = FindObjectsOfType<Canvas>()[0];
+            foreach (Transform child in canvas.transform)
+            {
+                Destroy(child.gameObject);
+            }
 
-        // Call the AgentGenerator to generate new agents
-        GetComponent<AgentGenerator>().spawnAgents();
+            // Reset the zone
+            Zone zone = FindObjectsOfType<Zone>()[0];
+            zone.reset();
+
+            // Call the AgentGenerator to generate new agents
+            GetComponent<AgentGenerator>().spawnAgents();
+        }
     }
 }

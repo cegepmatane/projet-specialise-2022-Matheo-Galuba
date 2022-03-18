@@ -6,6 +6,17 @@ public class EnemyChecker : MonoBehaviour
 {
     public List<GameObject> reachableGameObjects = new List<GameObject>();
 
+    void FixedUpdate()
+    {
+        foreach (GameObject reachableGameObject in reachableGameObjects)
+        {
+            if (reachableGameObject == null)
+            {
+                reachableGameObjects.Remove(reachableGameObject);
+            }
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Agent")

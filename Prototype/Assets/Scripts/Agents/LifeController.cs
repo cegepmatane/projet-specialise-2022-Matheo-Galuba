@@ -35,7 +35,7 @@ public class LifeController : MonoBehaviour
         }
         else
         {
-            GetComponent<AgentController>().punish(damage);
+            GetComponent<AgentController>().AddReward(-50f);
             StartCoroutine(redFlash());
         }
     }
@@ -49,7 +49,7 @@ public class LifeController : MonoBehaviour
     {
         isInvincible = true;
 
-        for (float f = 1f; f >= 0; f -= 0.01f)
+        for (float f = 1f; f >= 0; f -= 0.04f)
         {
             renderer.material.color = Color.Lerp(originalColor, Color.red, f);
             yield return new WaitForSeconds(0.01f);

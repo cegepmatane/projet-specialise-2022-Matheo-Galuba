@@ -37,6 +37,11 @@ public class AgentController : Agent
         enemyChecker = GetComponentsInChildren<EnemyChecker>()[0];
     }
 
+    public void setTeamId(int teamId)
+    {
+        GetComponent<Unity.MLAgents.Policies.BehaviorParameters>().TeamId = teamId;
+    }
+
     public override void OnEpisodeBegin()
     {
         // Nothing for the moment
@@ -68,6 +73,10 @@ public class AgentController : Agent
             }
             sensor.AddObservation(hit.distance);
         }
+
+        // Observe the distance to the center of the arena
+        float distance = Mathf.Sqrt(Mathf.Pow(transform.position.x, 2) + Mathf.Pow(transform.position.z, 2));
+        sensor.AddObservation(distance);
     }
 
     // Method called when the agent receive data from the neural network
@@ -119,8 +128,9 @@ public class AgentController : Agent
         {
             foreach (GameObject enemy in reachableEnemies)
             {
-                AddReward(attackDamage);
+                AddReward(100f);
                 enemy.GetComponent<LifeController>().takeDamage(attackDamage);
+
             }
         }
     }

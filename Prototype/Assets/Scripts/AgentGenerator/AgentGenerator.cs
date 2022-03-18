@@ -1,7 +1,6 @@
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-
 
 public class AgentGenerator : MonoBehaviour
 {
@@ -43,6 +42,7 @@ public class AgentGenerator : MonoBehaviour
             GameObject agent = Instantiate(agentPrefab, generationPosition, generationRotation);
             agent.transform.parent = transform;
             agent.name = "Agent " + i;
+            agent.GetComponent<AgentController>().setTeamId(i);
             agents.Add(agent);
             GameObject agentLifeUI = Instantiate(agentLifeUIPrefab);
             agentLifeUI.transform.SetParent(canvas.transform);
