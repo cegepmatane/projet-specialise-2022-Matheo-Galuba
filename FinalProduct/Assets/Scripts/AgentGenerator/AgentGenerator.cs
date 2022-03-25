@@ -37,7 +37,7 @@ public class AgentGenerator : MonoBehaviour
         for (int i = 0; i < populationSize; ++i)
         {
             float angle = i * Mathf.PI * 2 / populationSize;
-            Vector3 generationPosition = new Vector3(Mathf.Cos(angle) * radius, agentHeight / 2, Mathf.Sin(angle) * radius);
+            Vector3 generationPosition = transform.position + new Vector3(Mathf.Cos(angle) * radius, agentHeight / 2, Mathf.Sin(angle) * radius);
             Quaternion generationRotation = Quaternion.Euler(0, -angle * Mathf.Rad2Deg - 90, 0);
             GameObject agent = Instantiate(agentPrefab, generationPosition, generationRotation);
             agent.transform.parent = transform;
@@ -48,6 +48,19 @@ public class AgentGenerator : MonoBehaviour
             agentLifeUI.transform.SetParent(canvas.transform);
             agentLifeUI.name = "AgentLifeUI " + i;
             agentLifeUI.GetComponent<AgentLifeUI>().SetAgent(agent);
+        }
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+
+        for (int i = 0; i < populationSize; ++i)
+        {
+            float angle = i * Mathf.PI * 2 / populationSize;
+            Vector3 generationPosition = new Vector3(Mathf.Cos(angle) * radius, 0.0f, Mathf.Sin(angle) * radius);
+            // Draw a point at the generation position
+            Gizmos.DrawSphere(transform.position + generationPosition, 0.1f);
         }
     }
 }
