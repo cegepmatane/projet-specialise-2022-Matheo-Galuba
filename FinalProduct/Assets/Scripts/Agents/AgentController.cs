@@ -52,26 +52,33 @@ public class AgentController : Agent
     {
         // Lunch 3 raycast in fornt of the agent with an angle of 30°
         // Make a layer mask to ignore the "Environment" layer
-        int layerMask = 1 << LayerMask.NameToLayer("Ignore Raycast");
-        layerMask = ~layerMask;
+        int agentLayerMask = 1 << LayerMask.NameToLayer("Arena");
+        agentLayerMask = ~agentLayerMask;
+        int arenaLayerMask = 1 << LayerMask.NameToLayer("Default");
+        arenaLayerMask = ~arenaLayerMask;
         // Eyes position
         Vector3 raycastOrigin = transform.position + transform.forward * 0.51f;
-        // Raycast output
-        RaycastHit hit;
+        // Raycast outputs
+        RaycastHit hitAgent;
+        RaycastHit hitArena;
 
         for (int i = 0; i < viewRayNumber; i++)
         {
             // Compute the raycast direction
             Vector3 raycastDirection = Quaternion.AngleAxis(-viewField / 2f + (viewField / (viewRayNumber - 1)) * i, transform.up) * transform.forward;
-            Physics.Raycast(raycastOrigin, raycastDirection, out hit, viewDistance, layerMask);
+            Physics.Raycast(raycastOrigin, raycastDirection, out hitAgent, viewDistance, agentLayerMask);
+            Physics.Raycast(raycastOrigin, raycastDirection, out hitArena, viewDistance, arenaLayerMask);
             if (showRays)
             {
-                if (hit.collider)
-                    Debug.DrawRay(raycastOrigin, raycastDirection * hit.distance, Color.red);
+                if (hitAgent.collider)
+                    Debug.DrawRay(raycastOrigin, raycastDirection * hitAgent.distance, Color.red);
+                else if (hitArena.collider)
+                    Debug.DrawRay(raycastOrigin, raycastDirection * hitArena.distance, Color.yellow);
                 else
                     Debug.DrawRay(raycastOrigin, raycastDirection * viewDistance, Color.green);
             }
-            sensor.AddObservation(hit.distance);
+            sensor.AddObservation(hitAgent.distance);
+            sensor.AddObservation(hitArena.distance);
         }
 
         // Observe the distance to the center of the arena

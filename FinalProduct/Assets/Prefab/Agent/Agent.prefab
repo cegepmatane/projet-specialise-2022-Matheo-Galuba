@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 31
+    VectorObservationSize: 61
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 2
@@ -225,7 +225,7 @@ MonoBehaviour:
   viewField: 160
   viewDistance: 30
   viewRayNumber: 30
-  showRays: 0
+  showRays: 1
   reachableEnemiesChecker: {fileID: 0}
   attackDamage: 20
 --- !u!114 &1054730056748422745

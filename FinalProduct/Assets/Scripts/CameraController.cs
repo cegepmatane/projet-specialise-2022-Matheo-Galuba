@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
         cameraOffset = transform.position - agentGenerator.position;
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         // Target managment
         if (targetAgent == null)
