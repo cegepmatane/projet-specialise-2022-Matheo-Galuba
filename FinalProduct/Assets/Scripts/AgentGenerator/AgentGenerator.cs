@@ -44,10 +44,10 @@ public class AgentGenerator : MonoBehaviour
             agent.name = "Agent " + i;
             agent.GetComponent<AgentController>().setTeamId(i);
             agents.Add(agent);
-            // GameObject agentLifeUI = Instantiate(agentLifeUIPrefab);
-            // agentLifeUI.transform.SetParent(canvas.transform);
-            // agentLifeUI.name = "AgentLifeUI " + i;
-            // agentLifeUI.GetComponent<AgentLifeUI>().SetAgent(agent);
+            GameObject agentLifeUI = Instantiate(agentLifeUIPrefab);
+            agentLifeUI.transform.SetParent(canvas.transform);
+            agentLifeUI.name = "AgentLifeUI " + i;
+            agentLifeUI.GetComponent<AgentLifeUI>().SetAgent(agent);
         }
     }
 
