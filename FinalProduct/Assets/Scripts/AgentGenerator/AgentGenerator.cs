@@ -32,7 +32,7 @@ public class AgentGenerator : MonoBehaviour
     public void spawnAgents()
     {
         // Compute the agent height to offset the generation position
-        float agentHeight = agentPrefab.GetComponent<Renderer>().bounds.size.y;
+        float agentHeight = agentPrefab.GetComponentInChildren<Renderer>().bounds.size.y;
 
         for (int i = 0; i < populationSize; ++i)
         {
@@ -44,10 +44,10 @@ public class AgentGenerator : MonoBehaviour
             agent.name = "Agent " + i;
             agent.GetComponent<AgentController>().setTeamId(i);
             agents.Add(agent);
-            GameObject agentLifeUI = Instantiate(agentLifeUIPrefab);
-            agentLifeUI.transform.SetParent(canvas.transform);
-            agentLifeUI.name = "AgentLifeUI " + i;
-            agentLifeUI.GetComponent<AgentLifeUI>().SetAgent(agent);
+            // GameObject agentLifeUI = Instantiate(agentLifeUIPrefab);
+            // agentLifeUI.transform.SetParent(canvas.transform);
+            // agentLifeUI.name = "AgentLifeUI " + i;
+            // agentLifeUI.GetComponent<AgentLifeUI>().SetAgent(agent);
         }
     }
 

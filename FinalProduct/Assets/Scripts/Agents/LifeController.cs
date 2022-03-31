@@ -7,17 +7,17 @@ public class LifeController : MonoBehaviour
     [SerializeField]
     private float life = 100.0f;
 
-    private Renderer renderer = null;
-    private Color originalColor;
+    // private Renderer renderer = null;
     private IEnumerator takeDamageCoroutine;
     private bool isInvincible = false;
     private EnemyChecker enemyChecker;
+    private Animator animator;
 
     public void Start()
     {
-        renderer = GetComponent<Renderer>();
-        originalColor = renderer.material.color;
         enemyChecker = GetComponentInChildren<EnemyChecker>();
+
+        animator = GetComponent<Animator>();
     }
 
     public void takeDamage(float damage)
@@ -36,7 +36,7 @@ public class LifeController : MonoBehaviour
         else
         {
             GetComponent<AgentController>().AddReward(-50f);
-            StartCoroutine(redFlash());
+            StartCoroutine(damageCoroutine());
         }
     }
 
@@ -45,13 +45,13 @@ public class LifeController : MonoBehaviour
         return life;
     }
 
-    IEnumerator redFlash()
+    IEnumerator damageCoroutine()
     {
         isInvincible = true;
 
         for (float f = 1f; f >= 0; f -= 0.04f)
         {
-            renderer.material.color = Color.Lerp(originalColor, Color.red, f);
+            animator.SetTrigger("Take Damage");
             yield return new WaitForSeconds(0.01f);
         }
 

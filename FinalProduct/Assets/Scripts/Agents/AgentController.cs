@@ -7,10 +7,11 @@ using Unity.MLAgents.Sensors;
 
 public class AgentController : Agent
 {
-    // Move speed
+    // Movement
     [Header("Movement")]
     [SerializeField]
     private float moveSpeed = 5f;
+    private Animator animator;
 
     // Vision parameters
     [Header("Vision")]
@@ -35,6 +36,7 @@ public class AgentController : Agent
     public void Start()
     {
         enemyChecker = GetComponentsInChildren<EnemyChecker>()[0];
+        animator = GetComponent<Animator>();
     }
 
     public void setTeamId(int teamId)
@@ -110,6 +112,41 @@ public class AgentController : Agent
         {
             attack();
         }
+
+        // Animate the agent
+        if (moveY >= 0.2f)
+        {
+            if (moveY >= 0.8f)
+            {
+                animator.SetBool("Walk Forward", false);
+                animator.SetBool("Run Forward", true);
+            }
+            else
+            {
+                animator.SetBool("Walk Forward", true);
+                animator.SetBool("Run Forward", false);
+            }
+        }
+        else if (moveY <= -0.2f)
+        {
+            if (moveY <= -0.8f)
+            {
+                animator.SetBool("Walk Backward", false);
+                animator.SetBool("Run Backward", true);
+            }
+            else
+            {
+                animator.SetBool("Walk Backward", true);
+                animator.SetBool("Run Backward", false);
+            }
+        }
+        else
+        {
+            animator.SetBool("Walk Forward", false);
+            animator.SetBool("Run Forward", false);
+            animator.SetBool("Walk Backward", false);
+            animator.SetBool("Run Backward", false);
+        }
     }
 
     // Methode called when the user override the agent actions with heuristic mode
@@ -140,6 +177,8 @@ public class AgentController : Agent
 
             }
         }
+
+        animator.SetTrigger("Attack 02");
     }
 
     public void punish(float punishment)
