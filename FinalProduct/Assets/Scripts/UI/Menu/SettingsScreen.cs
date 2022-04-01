@@ -1,16 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class SettingsScreen : MonoBehaviour
 {
-    void OnMapDropdownValueChanged(int value)
+    [Header("Map Settings")]
+    public TMP_Dropdown _mapDropdown;
+
+    [Header("Population Settings")]
+    [SerializeField]
+    private Slider _populationSlider;
+    [SerializeField]
+    private TMP_Text _populationReactiveText;
+
+    private void Start()
     {
+        _populationReactiveText.text = _populationSlider.value.ToString();
+    }
+
+    public void OnMapDropdownValueChanged()
+    {
+        int value = _mapDropdown.value;
         GameManager.Instance.SetMapType((Map)value);
     }
 
-    void OnPopulationSliderValueChanged(int value)
+    public void OnPopulationSliderValueChanged()
     {
-        GameManager.Instance.SetPopulation((int)value);
+        int value = (int)_populationSlider.value;
+        GameManager.Instance.SetPopulation(value);
+        _populationReactiveText.text = value.ToString();
     }
 }
