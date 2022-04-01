@@ -14531,6 +14531,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8420394929009817898, guid: d793708be4ee5be40af341a5bdfc90dd, type: 3}
+      propertyPath: m_Intensity
+      value: 8.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420394929009817898, guid: d793708be4ee5be40af341a5bdfc90dd, type: 3}
+      propertyPath: m_Lightmapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420394929009817898, guid: d793708be4ee5be40af341a5bdfc90dd, type: 3}
+      propertyPath: m_ShadowRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420394929009817898, guid: d793708be4ee5be40af341a5bdfc90dd, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420394929009817898, guid: d793708be4ee5be40af341a5bdfc90dd, type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 3.92e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420394929009817898, guid: d793708be4ee5be40af341a5bdfc90dd, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 7.47e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 8420394929009817898, guid: d793708be4ee5be40af341a5bdfc90dd, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 1.96e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 8982436943639932807, guid: d793708be4ee5be40af341a5bdfc90dd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8982436943639932807, guid: d793708be4ee5be40af341a5bdfc90dd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d793708be4ee5be40af341a5bdfc90dd, type: 3}
 --- !u!4 &850022659 stripped
@@ -14567,7 +14603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 327fc4f786356734299baf9697b590d1, type: 2}
+  sharedProfile: {fileID: 11400000, guid: a7d733d81ceb4d64c8532ae5434ee2b1, type: 2}
   isGlobal: 1
   blendDistance: 0
   weight: 1
