@@ -17174,7 +17174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1016825222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17184,15 +17184,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1016825221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 372b4ee30f75d16438555d74a29399ff, type: 3}
+  m_Script: {fileID: 11500000, guid: a650d7d8a0e6aab4bbd8f03433ab146f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  populationSize: 16
-  radius: 4
-  agentPrefab: {fileID: 1975194375736644, guid: 128a80094e00bf34fa2555766a7eea0e, type: 3}
-  zoneCollider: {fileID: 1661612779}
-  canvas: {fileID: 1213842249}
-  agentLifeUIPrefab: {fileID: 6607596634219118088, guid: 2e3c31bbbf097b74d803b5d033b1dfef, type: 3}
+  populationSize: 10
+  agentPrefab: {fileID: 0}
+  zoneCollider: {fileID: 0}
+  canvas: {fileID: 0}
+  agentLifeUIPrefab: {fileID: 0}
+  populationSize: 10
+  radius: 20
+  agentPrefab: {fileID: 0}
+  zoneCollider: {fileID: 0}
+  canvas: {fileID: 0}
+  agentLifeUIPrefab: {fileID: 0}
 --- !u!4 &1016825223
 Transform:
   m_ObjectHideFlags: 0
