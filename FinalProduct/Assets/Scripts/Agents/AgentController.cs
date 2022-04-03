@@ -177,6 +177,10 @@ public class AgentController : Agent
 
             }
         }
+        else
+        {
+            punish(10f);
+        }
 
         animator.SetTrigger("Attack 02");
     }

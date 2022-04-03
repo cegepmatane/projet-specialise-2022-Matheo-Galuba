@@ -16,39 +16,39 @@ public class RectangularAgentGenerator : AgentGenerator
             return;
         }
 
-        Gizmos.color = Color.yellow;
-
-        int populationPerArea = populationSize / spawnAreaColliders.Count;
+        int populationPerArea = Mathf.CeilToInt((float)populationSize / (float)spawnAreaColliders.Count);
+        int agentGeneratedCounter = 0;
 
         foreach (BoxCollider spawnAreaCollider in spawnAreaColliders)
         {
             float minDistanceBetweenAgents = Mathf.Sqrt(spawnAreaCollider.size.x * spawnAreaCollider.size.z / populationPerArea);
             int numberOfRows = Mathf.CeilToInt(spawnAreaCollider.size.x / minDistanceBetweenAgents);
-            int numberOfColumns = Mathf.CeilToInt(spawnAreaCollider.size.z / minDistanceBetweenAgents);
-            int agentGeneratedCounter = 0;
+            int numberOfColumns = Mathf.CeilToInt(spawnAreaCollider.size.z / minDistanceBetweenAgents) - 1;
+            int agentGeneratedInAreaCounter = 0;
 
-            for (int i = 0; i <= numberOfRows; ++i)
+            for (int i = 0; i < numberOfRows; ++i)
             {
-                float x = i * spawnAreaCollider.size.x / numberOfRows + spawnAreaCollider.transform.position.x - spawnAreaCollider.size.x / 2;
+                float x = i * spawnAreaCollider.size.x / (numberOfRows - 1) + spawnAreaCollider.transform.position.x - spawnAreaCollider.size.x / 2;
 
                 for (int j = 0; j < numberOfColumns; ++j)
                 {
-                    if (agentGeneratedCounter < populationPerArea)
+                    if (agentGeneratedInAreaCounter < populationPerArea && agentGeneratedCounter < populationSize)
                     {
-                        float z = j * spawnAreaCollider.size.z / numberOfColumns + spawnAreaCollider.transform.position.z - spawnAreaCollider.size.z / 2;
+                        float z = j * spawnAreaCollider.size.z / (numberOfColumns - 1) + spawnAreaCollider.transform.position.z - spawnAreaCollider.size.z / 2;
 
                         Vector3 generationPosition = new Vector3(x, transform.position.y, z);
                         Quaternion generationRotation = Quaternion.Euler(0, 0, 0);
-                        GameObject agent = Instantiate(agentPrefab, generationPosition, generationRotation);
+                        GameObject agent = Instantiate(agentPrefab, spawnAreaCollider.center + generationPosition, generationRotation);
                         agent.transform.parent = transform;
-                        agent.name = "Agent " + i;
+                        agent.name = "Agent " + agentGeneratedCounter;
                         agent.GetComponent<AgentController>().setTeamId(i);
                         agents.Add(agent);
                         GameObject agentLifeUI = Instantiate(agentLifeUIPrefab);
                         agentLifeUI.transform.SetParent(canvas.transform);
-                        agentLifeUI.name = "AgentLifeUI " + i;
+                        agentLifeUI.name = "AgentLifeUI " + agentGeneratedCounter;
                         agentLifeUI.GetComponent<AgentLifeUI>().SetAgent(agent);
 
+                        agentGeneratedInAreaCounter++;
                         agentGeneratedCounter++;
                     }
                     else
@@ -70,28 +70,30 @@ public class RectangularAgentGenerator : AgentGenerator
 
         Gizmos.color = Color.yellow;
 
-        int populationPerArea = populationSize / spawnAreaColliders.Count;
+        int populationPerArea = Mathf.CeilToInt((float)populationSize / (float)spawnAreaColliders.Count);
+        int agentGeneratedCounter = 0;
 
         foreach (BoxCollider spawnAreaCollider in spawnAreaColliders)
         {
             float minDistanceBetweenAgents = Mathf.Sqrt(spawnAreaCollider.size.x * spawnAreaCollider.size.z / populationPerArea);
             int numberOfRows = Mathf.CeilToInt(spawnAreaCollider.size.x / minDistanceBetweenAgents);
-            int numberOfColumns = Mathf.CeilToInt(spawnAreaCollider.size.z / minDistanceBetweenAgents);
-            int agentGeneratedCounter = 0;
+            int numberOfColumns = Mathf.CeilToInt(spawnAreaCollider.size.z / minDistanceBetweenAgents) - 1;
+            int agentGeneratedInAreaCounter = 0;
 
-            for (int i = 0; i <= numberOfRows; ++i)
+            for (int i = 0; i < numberOfRows; ++i)
             {
-                float x = i * spawnAreaCollider.size.x / numberOfRows + spawnAreaCollider.transform.position.x - spawnAreaCollider.size.x / 2;
+                float x = i * spawnAreaCollider.size.x / (numberOfRows - 1) + spawnAreaCollider.transform.position.x - spawnAreaCollider.size.x / 2;
 
                 for (int j = 0; j < numberOfColumns; ++j)
                 {
-                    if (agentGeneratedCounter < populationPerArea)
+                    if (agentGeneratedInAreaCounter < populationPerArea && agentGeneratedCounter < populationSize)
                     {
-                        float z = j * spawnAreaCollider.size.z / numberOfColumns + spawnAreaCollider.transform.position.z - spawnAreaCollider.size.z / 2;
+                        float z = j * spawnAreaCollider.size.z / (numberOfColumns - 1) + spawnAreaCollider.transform.position.z - spawnAreaCollider.size.z / 2;
 
                         Vector3 generationPosition = new Vector3(x, transform.position.y, z);
                         // Draw a point at the generation position
                         Gizmos.DrawSphere(spawnAreaCollider.center + generationPosition, 0.1f);
+                        agentGeneratedInAreaCounter++;
                         agentGeneratedCounter++;
                     }
                     else

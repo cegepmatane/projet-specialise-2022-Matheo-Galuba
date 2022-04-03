@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
         if (mapType == Map.Dungeon)
         {
             SceneManager.LoadScene("Dungeon");
+            // Wait for the scene to load
+            // 
         }
         else if (mapType == Map.Desert)
         {
