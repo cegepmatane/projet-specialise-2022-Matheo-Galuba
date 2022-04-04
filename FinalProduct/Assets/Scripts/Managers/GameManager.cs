@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     private int population = 10;
 
-    public void Awake()
+    private void Awake()
     {
         // If the static instance is null, set it to this
         if (Instance == null)
@@ -32,6 +32,15 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        // Load the menu if escape key is pressed
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            LoadMenu();
         }
     }
 
