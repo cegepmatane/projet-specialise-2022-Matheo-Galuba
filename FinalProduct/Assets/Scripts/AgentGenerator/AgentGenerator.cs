@@ -7,7 +7,7 @@ public class AgentGenerator : MonoBehaviour
     // Generation settings
     [Header("Generation")]
     [SerializeField]
-    protected int populationSize = 10;
+    protected int populationSize;
     [SerializeField]
     protected GameObject agentPrefab;
     [SerializeField]
@@ -24,16 +24,13 @@ public class AgentGenerator : MonoBehaviour
 
     public void Start()
     {
+        // Get the game manager and set the population size
+        populationSize = FindObjectOfType<GameManager>().GetPopulation();
         spawnAgents();
     }
 
     public virtual void spawnAgents()
     {
         // To be implemented by the child class
-    }
-
-    public void setPopulationSize(int populationSize)
-    {
-        this.populationSize = populationSize;
     }
 }

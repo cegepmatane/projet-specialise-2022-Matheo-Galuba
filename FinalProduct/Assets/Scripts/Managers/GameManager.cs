@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         // If the static instance is not null, destroy this
         else
@@ -46,8 +47,6 @@ public class GameManager : MonoBehaviour
         if (mapType == Map.Dungeon)
         {
             SceneManager.LoadScene("Dungeon");
-            // Wait for the scene to load
-            // 
         }
         else if (mapType == Map.Desert)
         {
@@ -67,5 +66,10 @@ public class GameManager : MonoBehaviour
     public void SetPopulation(int populationToSet)
     {
         population = populationToSet;
+    }
+
+    public int GetPopulation()
+    {
+        return population;
     }
 }

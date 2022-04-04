@@ -1218,7 +1218,7 @@ MonoBehaviour:
   viewRayNumber: 30
   showRays: 1
   reachableEnemiesChecker: {fileID: 7291144070780076426}
-  attackDamage: 1
+  attackDamage: 10
 --- !u!114 &-4361038458548603114
 MonoBehaviour:
   m_ObjectHideFlags: 0

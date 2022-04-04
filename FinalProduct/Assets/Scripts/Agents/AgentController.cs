@@ -53,11 +53,9 @@ public class AgentController : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         // Lunch 3 raycast in fornt of the agent with an angle of 30°
-        // Make a layer mask to ignore the "Environment" layer
-        int agentLayerMask = 1 << LayerMask.NameToLayer("Arena");
-        agentLayerMask = ~agentLayerMask;
-        int arenaLayerMask = 1 << LayerMask.NameToLayer("Default");
-        arenaLayerMask = ~arenaLayerMask;
+        // Make a layer mask to ignore the "Arena" layer and "Ignore Raycast" layer
+        int agentLayerMask = ~(1 << LayerMask.NameToLayer("Arena") | 1 << LayerMask.NameToLayer("Ignore Raycast"));
+        int arenaLayerMask = ~(1 << LayerMask.NameToLayer("Default") | 1 << LayerMask.NameToLayer("Ignore Raycast"));
         // Eyes position
         Vector3 raycastOrigin = transform.position + transform.forward * 0.51f;
         // Raycast outputs
