@@ -9,6 +9,10 @@
 - **Repo github :** [lien](https://github.com/cegepmatane/projet-specialise-2022-Matheo-Galuba)
 - **Aspect pricipal :** Intelligence Artificielle
 
+## Vidéo de presentation
+
+[![Vidéo de presentation](https://img.youtube.com/vi/L8SqIz3clD0/0.jpg)](https://www.youtube.com/watch?v=L8SqIz3clD0)
+
 ## Documentation du projet
 
 [Lien vers la fiche de lancement "kickoff"](https://docs.google.com/document/d/1qF1iZAdF3IDPa3s8YlFjtiXWpijnrOiP3hhAlVRNXjY/edit?usp=sharing)
